@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <title>Movie Recommendations</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="static/style.css">
 </head>
-
 <body>
-    
-    <h1>Movie Recommendations</h1>
-    <form id="recommendation-form">
-        <label for="user_filter">Minimum number of ratings: </label>
-        <input type="number" id="user_filter" name="user_filter" value="100">
-        <button type="submit">Get Recommendations</button>
 
-    </form>
-    <div id="recommendations"></div>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div class="wrapper">
+
+        <main>
+            <h1>Movie Recommender System</h1>
+            <br>
+
+            <h3>Generic recommendation</h3>
+            <p class="genericTxt">Get a generic recommendation for movies based off 
+                most rated movies with highest score
+            </p>
+
+            <form id="recommendation-form" class="generic-form">
+                <label for="user_filter">Minimum number of ratings: </label>
+                <input type="number" id="user_filter" name="user_filter" value="100">
+                <button type="submit">⌕</button>
+            </form>
+            <div id="recommendations"></div>
+            
+            <br><br>
+
+            <h3>Movie recommendation</h3>
+            <p class="tfidfMovieTxt">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF algorithm</p>
+            <form id="recommendation-tfidf-movie" class="searchbar">
+                <input type="text" id="tfidf-mov-search" placeholder="search movie" name="tfidf-mov">
+                <button type="submit">⌕</button>
+            </form>
+            <div id="recommendations-tfidf"></div>
+            
+            <br><br>
+
+            <h3>Genre recommendation</h3>
+            <p class="knnGenreTxt">Get a recommendation according to the movie genre you enjoy also done with kNN</p>
+            <form id="recommendation-knn-genre" class="searchbar">
+                <input type="text" id="knn-genre-search" placeholder="search genre" name="knn-genre">
+                <button type="submit">⌕</button>
+
+            </form>
+            <div id="recommendations-genre"></div>
+
+        </main>
+
+    </div>
+
+    <script src="static/script.js"></script>
+
 </body>
 </html>
