@@ -1,17 +1,77 @@
 body {
-    font-family: Arial;
+    font-family: 'Poppins';
+    background: rgba(0,8,51,0.9);
+}
+
+.wrapper{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 20px;
+    color: rgb(205, 208, 211);
+
 }
 
 h1 {
     text-align: center;
+    font-size: 4.2rem;
+    font-weight: normal;
+    margin: 0;
+    padding-bottom: 150px;
 }
 
-form {
-    text-align: center;
-    margin-top: 20px;
+
+.generic-form input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    align-items: center;
+    color: #b5b3e4;
+    font-size: auto
 }
+
+.generic-form label{
+    text-align: center;
+    align-items: center;
+    font-size: auto;
+}
+
 
 #recommendations {
     margin-top: 20px;
     text-align: center;
+}
+
+
+.searchbar, .generic-form{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 60px;
+    padding: 10px 20px;
+    backdrop-filter: blur(4px) saturate(140%);
+    
+}
+
+.searchbar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    font-size: 20px;
+    color: #cac7ff;
+}
+
+.searchbar button, .generic-form button{
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #58629b;
+    cursor: pointer;
+    font-size: 30px;
 }
