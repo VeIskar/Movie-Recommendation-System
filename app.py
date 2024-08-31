@@ -52,6 +52,13 @@ def recommend_tfidf():
     recommendations = recom_tfid_title(movie_title)
     return jsonify(recommendations.to_dict(orient='index'))
 
+@app.route('/autocomplete/movies', methods=['GET'])
+def autocomplete_movies():
+    query = request.args.get('query', type=str)
+    matches = mov_df[mov_df['title'].str.contains(query, case=False)]
+    suggestions = matches['title'].tolist()
+    return jsonify(suggestions)
+
 @app.route('/')
 def index():
     return render_template('index.html')

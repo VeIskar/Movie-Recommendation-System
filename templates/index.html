@@ -25,7 +25,7 @@
             
             <form id="recommendation-form" class="generic-form">
                 <label for="user_filter">Minimum number of ratings: </label>
-                <input type="number" id="user_filter" name="user_filter" value="100">
+                <input type="number" id="user_filter" name="user_filter" min="0" value="100">
                 <button type="submit">⌕</button>
             </form>
             <div id="recommendations">
@@ -37,7 +37,7 @@
             <h3>Movie recommendation</h3>
             <p class="tfidfMovieTxt">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF (based on movie title similarity) algorithm</p>
             <form id="recommendation-tfidf-movie" class="searchbar">
-                <input type="text" id="tfidf-mov-search" placeholder="search movie" name="tfidf-mov">
+                <input type="text" id="tfidf-mov-search" placeholder="search movie" name="tfidf-mov" autocomplete="off">
                 <button type="submit">⌕</button>
             </form>
             <div id="recommendations-tfidf"></div>
