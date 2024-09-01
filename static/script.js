@@ -49,18 +49,16 @@ document.getElementById('recommendation-tfidf-movie').addEventListener('submit',
 });
 
 
-$(function() {
-    $("#tfidf-mov-search").autocomplete({
-        source: function(request, response) {
-            $.ajax({
-                url: "/autocomplete/movies" ,
-                data: { query: request.term}, 
-                success: function(data) {
-                    response(data);
-                }
-            });
-        },
-        minLength: 2
+document.getElementById('tfidf-mov-search').addEventListener('input', function() {
+    let query = this.value;
+    if (query.length > 2) {
+        fetch(`/autocomplete/movies?query=${query}`)
+            .then(response => response.json())
+            .then(data => {
 
-    }); 
+                let suggestions = data.map(movie => `<option value="${movie}"></option>`);
+                document.getElementById('movie-suggestions').innerHTML = suggestions.join('');
+
+             });
+    }
 });

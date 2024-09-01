@@ -43,6 +43,10 @@ h1 {
     text-align: center;
 }
 
+#recommendations-tfidf div {
+    text-align: center;
+    margin: 10px 0;
+}
 
 .searchbar, .generic-form{
     width: 100%;

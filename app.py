@@ -55,8 +55,11 @@ def recommend_tfidf():
 @app.route('/autocomplete/movies', methods=['GET'])
 def autocomplete_movies():
     query = request.args.get('query', type=str)
-    matches = mov_df[mov_df['title'].str.contains(query, case=False)]
-    suggestions = matches['title'].tolist()
+    if query:
+        matches = mov_df[mov_df['title'].str.contains(query, case=False)]
+        suggestions = matches['title'].tolist()
+    else:
+        suggestions = []
     return jsonify(suggestions)
 
 @app.route('/')
