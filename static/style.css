@@ -70,7 +70,7 @@ h1 {
     color: #cac7ff;
 }
 
-.searchbar button, .generic-form button{
+.searchbar button, .generic-form button, .recommendations-genre button{
     border: 0;
     border-radius: 30px;
     width: 60px;

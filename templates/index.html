@@ -48,7 +48,8 @@
             <h3>Genre recommendation</h3>
             <p class="knnGenreTxt">Get a recommendation according to the movie genre you enjoy also done with kNN</p>
             <form id="recommendation-knn-genre" class="searchbar">
-                <input type="text" id="knn-genre-search" placeholder="search genre" name="knn-genre">
+                <input type="text" id="knn-genre-search" placeholder="search genre" name="knn-genre" autocomplete="off">
+                <datalist id="genre-suggestions"></datalist>
                 <button type="submit">⌕</button>
 
             </form>

@@ -45,6 +45,37 @@ def recom_tfid_title(movie_title):
     
     return sim_movs_tl.head(10)
 
+#Knn item-based collaborative filtering genre recommender
+def filter_genre(genre):
+    return mov_df[mov_df['genres'].str.contains(genre, case=False)]
+
+def knn_genre_recoms(genre, n_neighbors):
+    genre_fil_movs = filter_genre(genre)
+    
+    if genre_fil_movs.empty:
+        return []
+
+    genre_matrix = genre_fil_movs['genre_list'].str.join('|').str.get_dummies()
+    knn = NearestNeighbors(metric='cosine', algorithm='brute')
+    knn.fit(genre_matrix.values)
+    
+    first_mov_id = genre_fil_movs['movieId'].iloc[0]
+    movie_vector = genre_matrix.loc[first_mov_id].values.reshape(1, -1)
+    dist, ind = knn.kneighbors(movie_vector, n_neighbors + 1)
+    
+    similar_movs = genre_fil_movs.iloc[ind[0][1:]]
+    similar_movs['similarity'] = dist[0][1:]
+    return similar_movs
+
+all_gens = []
+for genres in mov_df['genre_list']:
+    if genres not in all_gens and genres!='':
+        all_gens.append(genres)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 @app.route('/recommend/tfidf', methods=['POST'])
 def recommend_tfidf():
@@ -62,9 +93,24 @@ def autocomplete_movies():
         suggestions = []
     return jsonify(suggestions)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
+@app.route('/recommend/genre', methods=['POST'])
+def recommend_genre():
+    genre = request.form.get('knn-genre', type=str)
+    recommendations = knn_genre_recoms(genre, 10)
+    return jsonify(recommendations.to_dict(orient='index'))
+
+@app.route('/autocomplete/genres', methods=['GET'])
+def autocomplete_genres():
+    query = request.args.get('query', type=str)
+    matches = []
+
+    for genre in all_gens:
+        if query.lower() in genre.lower():
+            matches.append(genre)
+
+    return jsonify(matches)
+
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
