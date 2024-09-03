@@ -49,7 +49,7 @@ def recom_tfid_title(movie_title):
 def filter_genre(genre):
     return mov_df[mov_df['genres'].str.contains(genre, case=False)]
 
-def knn_genre_recoms(genre, n_neighbors):
+def knn_genre_recoms(genre, n_neighbors=10):
     genre_fil_movs = filter_genre(genre)
     
     if genre_fil_movs.empty:
@@ -59,13 +59,15 @@ def knn_genre_recoms(genre, n_neighbors):
     knn = NearestNeighbors(metric='cosine', algorithm='brute')
     knn.fit(genre_matrix.values)
     
-    first_mov_id = genre_fil_movs['movieId'].iloc[0]
-    movie_vector = genre_matrix.loc[first_mov_id].values.reshape(1, -1)
-    dist, ind = knn.kneighbors(movie_vector, n_neighbors + 1)
+    first_movie_index = genre_matrix.index[0]
+    movie_vector = genre_matrix.loc[first_movie_index].values.reshape(1, -1)
+    distances, indices = knn.kneighbors(movie_vector, n_neighbors + 1)
     
-    similar_movs = genre_fil_movs.iloc[ind[0][1:]]
-    similar_movs['similarity'] = dist[0][1:]
-    return similar_movs
+    similar_indices = genre_fil_movs.iloc[indices.flatten()[1:]].index
+    similar_movies = mov_df.loc[similar_indices]
+    similar_movies['similarity'] = distances.flatten()[1:]
+    return similar_movies
+
 
 all_gens = []
 for genres in mov_df['genre_list']:
