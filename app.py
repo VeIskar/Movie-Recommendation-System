@@ -69,10 +69,14 @@ def knn_genre_recoms(genre, n_neighbors=10):
     return similar_movies
 
 
-all_gens = []
-for genres in mov_df['genre_list']:
-    if genres not in all_gens and genres!='':
-        all_gens.append(genres)
+all_gens_set = set()
+
+for i in mov_df['genre_list']:
+    for gen in i:
+        if gen:
+            all_gens_set.add(gen)
+
+all_gens = sorted(all_gens_set)
 
 
 @app.route('/')
@@ -106,12 +110,17 @@ def recommend_genre():
 def autocomplete_genres():
     query = request.args.get('query', type=str)
     matches = []
+    if query:
+        for genre in all_gens:
+            if query.lower() in genre.lower():
+                matches.append(genre)
 
-    for genre in all_gens:
-        if query.lower() in genre.lower():
-            matches.append(genre)
+        suggestions = list(set(matches))
 
-    return jsonify(matches)
+    else:
+        suggestions = []
+
+    return jsonify(suggestions)
 
 
 @app.route('/recommend', methods=['POST'])
