@@ -38,7 +38,7 @@ h1 {
 }
 
 
-#recommendations, #recommendations-tfidf, #recommendations-genre {
+#recommendations, #recommendations-tfidf, #recommendations-genre, #recommendations-tfidf-allsrch {
     margin-top: 20px;
     text-align: center;
 }

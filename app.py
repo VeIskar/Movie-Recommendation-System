@@ -45,6 +45,22 @@ def recom_tfid_title(movie_title):
     
     return sim_movs_tl.head(10)
 
+#tf-idf based on cosine measure and other movies score
+def find_tfidf_allsrch(movie_id):
+    sim_users = rat_df[(rat_df["movieId"] == movie_id) & (rat_df["rating"] > 4)]["userId"].unique()
+    similar_user_rats = rat_df[(rat_df["userId"].isin(sim_users)) & (rat_df["rating"] > 4)]["movieId"]
+    similar_user_rats = similar_user_rats.value_counts() / len(sim_users)
+
+    similar_user_rats = similar_user_rats[similar_user_rats > 0.10]
+    all_users = rat_df[(rat_df["movieId"].isin(similar_user_rats.index)) & (rat_df["rating"] > 4)]
+    all_user_rats = all_users["movieId"].value_counts() / len(all_users["userId"].unique())
+    rat_perct = pd.concat([similar_user_rats, all_user_rats], axis=1)
+    rat_perct.columns = ["similar", "all"]
+    
+    rat_perct["score"] = rat_perct["similar"] / rat_perct["all"]
+    rat_perct = rat_perct.sort_values("score", ascending=False)
+    return rat_perct.head(10).merge(mov_df, left_index=True, right_on="movieId")[["score", "title", "genres"]]
+
 #Knn item-based collaborative filtering genre recommender
 def filter_genre(genre):
     return mov_df[mov_df['genres'].str.contains(genre, case=False)]
@@ -87,6 +103,13 @@ def index():
 def recommend_tfidf():
     movie_title = request.form.get('tfidf-mov', type=str)
     recommendations = recom_tfid_title(movie_title)
+    return jsonify(recommendations.to_dict(orient='index'))
+
+@app.route('/recommend/tfidf_all', methods=['POST'])
+def recommend_tfidf_all():
+    movie_title = request.form.get('tfidf-mov', type=str)
+    movie_id = mov_df[mov_df['title'].str.contains(movie_title, case=False)].iloc[0]['movieId']
+    recommendations = find_tfidf_allsrch(movie_id)
     return jsonify(recommendations.to_dict(orient='index'))
 
 @app.route('/autocomplete/movies', methods=['GET'])

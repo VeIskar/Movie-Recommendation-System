@@ -45,6 +45,16 @@
             
             <br><br>
 
+            <p class="tfidfMovieTxt2">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF recommendation algorithm</p>
+            <form id="recommendation-tfidf-allsrch" class="searchbar">
+                <input type="text" id="tfidf-all-search" placeholder="search movie" name="tfidf-mov" list="movie-suggestions"  autocomplete="off">
+                <datalist id="movie-suggestions"></datalist>
+                <button type="submit">⌕</button>
+            </form>
+            <div id="recommendations-tfidf-allsrch"></div>
+            
+            <br><br>
+
             <h3>Genre recommendation</h3>
             <p class="knnGenreTxt">Get a recommendation according to the movie genre you enjoy also done with kNN</p>
             <form id="recommendation-knn-genre" class="searchbar">

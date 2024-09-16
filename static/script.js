@@ -48,6 +48,33 @@ document.getElementById('recommendation-tfidf-movie').addEventListener('submit',
     });
 });
 
+
+document.getElementById('recommendation-tfidf-allsrch').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    let query = document.getElementById('tfidf-all-search').value;
+
+    fetch('/recommend/tfidf_all', {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/x-www-form-urlencoded',
+        },
+        body: `tfidf-mov=${query}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        const recommendationsDiv = document.getElementById('recommendations-tfidf-allsrch');
+        recommendationsDiv.innerHTML = '<h2>Recommended Movies:</h2>' ;
+        for (let movieId in data) {
+            let movie = data[movieId];
+            let movieDiv = document.createElement('div');
+            movieDiv.innerHTML = `<strong>${movie.title}</strong> (${movie.genres})`;
+            recommendationsDiv.appendChild(movieDiv);
+        }
+
+    });
+});
+
 document.getElementById('recommendation-knn-genre').addEventListener('submit', function(event) {
     event.preventDefault();
     const genre = document.getElementById('knn-genre-search').value;
