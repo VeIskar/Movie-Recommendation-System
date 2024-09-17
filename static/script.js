@@ -108,7 +108,10 @@ document.getElementById('tfidf-mov-search').addEventListener('input', function()
             .then(response => response.json())
             .then(data => {
 
-                let suggestions = data.map(movie => `<option value="${movie}"></option>`);
+                let suggestions = data.map(movie => {
+                    let sug_title = movie.split('(')[0].trim();
+                    return `<option value="${sug_title}"></option>`;
+                });
                 document.getElementById('movie-suggestions').innerHTML = suggestions.join('');
 
              });
@@ -127,5 +130,22 @@ document.getElementById('knn-genre-search').addEventListener('input', function()
                 document.getElementById('genre-suggestions').innerHTML = suggestions.join('');
 
              });
+    }
+});
+
+document.getElementById('tfidf-all-search').addEventListener('input', function() {
+    let query = this.value;
+    if (query.length > 2) {
+        fetch(`/autocomplete/movies?query=${query}`)
+            .then(response => response.json())
+            .then(data => {
+
+                let suggestions = data.map(movie => {
+                    let sug_title = movie.split('(')[0].trim();
+                    return `<option value="${sug_title}"></option>`;
+                });
+                document.getElementById('movie-suggestions').innerHTML = suggestions.join('');
+
+            });
     }
 });
