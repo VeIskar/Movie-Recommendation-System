@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie Recommendations</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,53 +31,61 @@
             <h1>Movie Recommender System</h1>
             <br>
 
-            <h3>Generic recommendation</h3>
-            <p class="genericTxt">Get a generic recommendation for movies based off 
-                most rated movies with highest score
-            </p>
-
-            
-            <form id="recommendation-form" class="generic-form">
-                <label for="user_filter">Minimum number of ratings: </label>
-                <input type="number" id="user_filter" name="user_filter" min="0" value="100">
-                <button type="submit">⌕</button>
-            </form>
-            <div id="recommendations">
+            <section class="generic-recoms">
+                <h3>Generic recommendation</h3>
+                <p class="genericTxt">Get a generic recommendation for movies based off 
+                    most rated movies with highest score
+                </p>
                 
-            </div>
+                <form id="recommendation-form" class="generic-form">
+                    <label for="user_filter">Minimum number of ratings: </label>
+                    <input type="number" id="user_filter" name="user_filter" min="0" max="1000" value="100">
+                    <button type="submit">⌕</button>
+                </form>
+
+                <div id="recommendations"></div>
+
+            </section>
             
             <br><br>
 
-            <h3>Movie recommendation</h3>
-            <p class="tfidfMovieTxt">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF (based on movie title similarity) algorithm</p>
-            <form id="recommendation-tfidf-movie" class="searchbar">
-                <input type="text" id="tfidf-mov-search" placeholder="search movie" name="tfidf-mov" list="movie-suggestions"  autocomplete="off">
-                <datalist id="movie-suggestions"></datalist>
-                <button type="submit">⌕</button>
-            </form>
-            <div id="recommendations-tfidf"></div>
+            <section class="tfidf-recoms">
+                <h3>Movie recommendation</h3>
+                <p class="tfidfMovieTxt">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF (based on movie title similarity) algorithm</p>
+                <form id="recommendation-tfidf-movie" class="searchbar">
+                    <input type="text" id="tfidf-mov-search" placeholder="search movie" name="tfidf-mov" list="movie-suggestions"  autocomplete="off">
+                    <datalist id="movie-suggestions"></datalist>
+                    <button type="submit" aria-label="Search">⌕</button>
+                </form>
+
+                <div id="recommendations-tfidf"></div>
+
+                <br><br>
+
+                <p class="tfidfMovieTxt2">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF recommendation algorithm</p>
+                <form id="recommendation-tfidf-allsrch" class="searchbar">
+                    <input type="text" id="tfidf-all-search" placeholder="search movie" name="tfidf-mov" list="movie-suggestions"  autocomplete="off">
+                    <datalist id="movie-suggestions"></datalist>
+                    <button type="submit" aria-label="Search">⌕</button>
+                </form>
+                <div id="recommendations-tfidf-allsrch"></div>
+
+            </section>
             
             <br><br>
-
-            <p class="tfidfMovieTxt2">Get a recommendation of a movie similar to the one you put in searchbar done with the TF-IDF recommendation algorithm</p>
-            <form id="recommendation-tfidf-allsrch" class="searchbar">
-                <input type="text" id="tfidf-all-search" placeholder="search movie" name="tfidf-mov" list="movie-suggestions"  autocomplete="off">
-                <datalist id="movie-suggestions"></datalist>
-                <button type="submit">⌕</button>
-            </form>
-            <div id="recommendations-tfidf-allsrch"></div>
             
-            <br><br>
+            <section class="knnGen-recoms">
+                <h3>Genre recommendation</h3>
+                <p class="knnGenreTxt">Get a recommendation according to the movie genre you enjoy also done with kNN</p>
+                <form id="recommendation-knn-genre" class="searchbar">
+                    <input type="text" id="knn-genre-search" placeholder="search genre" name="knn-genre" list="genre-suggestions" autocomplete="off">
+                    <datalist id="genre-suggestions"></datalist>
+                    <button type="submit" aria-label="Search">⌕</button>
+                    
+                </form>
+                <div id="recommendations-genre"></div>
 
-            <h3>Genre recommendation</h3>
-            <p class="knnGenreTxt">Get a recommendation according to the movie genre you enjoy also done with kNN</p>
-            <form id="recommendation-knn-genre" class="searchbar">
-                <input type="text" id="knn-genre-search" placeholder="search genre" name="knn-genre" list="genre-suggestions" autocomplete="off">
-                <datalist id="genre-suggestions"></datalist>
-                <button type="submit">⌕</button>
-
-            </form>
-            <div id="recommendations-genre"></div>
+            </section>
 
         </main>
 

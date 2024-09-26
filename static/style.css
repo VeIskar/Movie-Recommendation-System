@@ -1,7 +1,17 @@
+:root {
+    --txt-color: #cfd8dc;
+    --hover-color: #404970;
+    --input-bg-color: rgba(255, 255, 255, 0.2);
+    --box-bg-color: rgba(255, 255, 255, 0.1);
+    --input-txt-color: #cac7ff;
+    --form-pad: 20px;
+}
+
+
 body {
     font-family: 'Poppins';
     background: linear-gradient(to right, #141e30, #243b55);
-    color: #cfd8dc;
+    color: var(--txt-color);
     line-height: 1.6;
     margin: 0;
     overflow-x: hidden;
@@ -12,15 +22,15 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     font-size: 20px;
-    padding: 20px;
-    color: rgb(205, 208, 211); 
+    padding:var(--form-pad);
+    color: var(--txt-color); 
 
 }
 
 main {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--box-bg-color);
     border-radius: 20px;
-    padding: 20px;
+    padding: var(--form-pad);
     box-shadow: 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -43,7 +53,7 @@ h3 {
 p {
     text-align: center;
     font-size: 1.6rem; 
-    color: #cfd8dc;
+    color: var(--txt-color);
 }
 
 .searchbar, .generic-form{
@@ -52,7 +62,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--input-bg-color);
     border-radius: 60px;
     padding: 10px 20px;
     backdrop-filter: blur(4px) saturate(140%);
@@ -67,7 +77,7 @@ p {
     outline: none;
     padding: 24px 20px;
     font-size: 20px;
-    color: #cac7ff;
+    color: var(--input-txt-color);
 }
 
 .generic-form input{
@@ -81,10 +91,13 @@ p {
     font-size: auto
 }
 
+#user_filter{
+    font-size: 1.1rem;
+}
+
 .generic-form label{
     text-align: center;
     align-items: center;
-    font-size: auto;
 }
 
 
@@ -102,7 +115,7 @@ p {
 #recommendations-tfidf-allsrch div{
     margin: 10px 0;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--box-bg-color);
     border-radius: 10px;
     font-size: 1.2rem;
 }
@@ -121,7 +134,7 @@ p {
 }
 
 button:hover {
-    background-color: #404970;
+    background-color: var(--hover-color);
 }
 
 .icon-background {
@@ -135,7 +148,7 @@ button:hover {
 .icon-background i {
     position: absolute;
     bottom: -10%;
-    color: rgba(255, 255, 255, 0.1);
+    color: var(--box-bg-color);
     font-size: 4rem;
     animation: float 10s infinite linear;
 }
@@ -156,7 +169,6 @@ button:hover {
 .icon-background i:nth-child(1) {
     left: 10%;
     animation-duration: 8s;
-    animation-delay: 0s;
 }
 
 .icon-background i:nth-child(2) {
@@ -168,31 +180,30 @@ button:hover {
 .icon-background i:nth-child(3) {
     left: 30%;
     animation-duration: 10s;
-    animation-delay: 4s;
+    animation-delay: 3s;
 }
 
 .icon-background i:nth-child(4) {
     left: 40%;
     animation-duration: 14s;
-    animation-delay: 6s;
+    animation-delay: 4s;
 }
 
 .icon-background i:nth-child(5) {
     left: 50%;
     animation-duration: 11s;
-    animation-delay: 8s;
+    animation-delay: 5s;
 }
 
 .icon-background i:nth-child(6) {
     left: 60%;
     animation-duration: 12s;
-    animation-delay: 9s;
 }
 
 .icon-background i:nth-child(7) {
     left: 70%;
     animation-duration: 13s;
-    animation-delay: 7s;
+    animation-delay: 5s;
 }
 
 .icon-background i:nth-child(8) {
@@ -205,4 +216,29 @@ button:hover {
     left: 90%;
     animation-duration: 12s;
     animation-delay: 4s;
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+        font-size: 18px;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    h3 {
+        font-size: 2rem;
+
+    }
+    .searchbar input, .generic-form input {
+        padding: 10px 15px;
+        font-size: 18px;
+    }
+    button {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+
+    }
 }
