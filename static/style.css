@@ -1,6 +1,6 @@
 :root {
     --txt-color: #cfd8dc;
-    --hover-color: #404970;
+    --hover-color: #c28fba;
     --input-bg-color: rgba(255, 255, 255, 0.2);
     --box-bg-color: rgba(255, 255, 255, 0.1);
     --input-txt-color: #cac7ff;
@@ -58,7 +58,7 @@ p {
 
 .searchbar, .generic-form{
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,8 +66,7 @@ p {
     border-radius: 60px;
     padding: 10px 20px;
     backdrop-filter: blur(4px) saturate(140%);
-    margin: 20px 0;
-    
+    margin: 20px auto;
 }
 
 .searchbar input{
@@ -120,21 +119,27 @@ p {
     font-size: 1.2rem;
 }
 
- button{
-    border: 0;
+
+button{
+    border: none;
     border-radius: 30px;
     width: 60px;
     height: 60px;
     padding: 10px 20px;
-    background: darkslategrey;
+    background: darkslategray;
     color: #fff;
     cursor: pointer;
     font-size: 30px;
-    transition: background 0.3s;
+    transition: background 0.3s ease, transform 0.3s ease;;
 }
 
 button:hover {
     background-color: var(--hover-color);
+    transform: scale(1.1);
+}
+button:active {
+    transform: scale(1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
 }
 
 .icon-background {
