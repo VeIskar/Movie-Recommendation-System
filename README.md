@@ -1,12 +1,10 @@
 ## Movie Recommendation System
 
-#### About
-This project focuses on developing a movie recommendation system using various data science and machine learning techniques. Dataset used in the project can be found on: https://grouplens.org/datasets/movielens/ although movielens dataset was generated on 26 September 26, 2018 it includes data about 9742 movies. 
+### About
+This project focuses on developing a movie recommendation system using various data science and machine learning techniques. Dataset used in the project can be found on: https://grouplens.org/datasets/movielens/ although movielens dataset was generated on 26 September 26, 2018 it includes data about 9742 movies. Besides juptyer file project offers a system built using Python and Flask, with web interface, which provides recommendations based on different algorithms.
 
-#### Features
-Integration of the project in Flask is complete with the kNN tf-idf and generic recommendation techniques in the current iteration. More features are however planned alongside with major frontend update whcih will be completed in the future.
-
-Jupyter file of my project is complete it leverages machine learning techniques to analyze user preferences and movie features. Below are the key components: 
+### Features
+Jupyter file leverages machine learning techniques to analyze user preferences and movie features. Below are the key components: 
 
 1. Generic Recommendation:
 - Method: Calculates the average rating of movies that have been rated by a specified minimum number of users.
@@ -20,30 +18,66 @@ Jupyter file of my project is complete it leverages machine learning techniques 
 - Data Visualization: plots and histograms visualizing information about users, movie genres, etc.
 
 **Flask Integration**
-The project includes a Flask web application that allows users to interact with the recommendation systems directly from a web browser with the following features:
+As mentioned previously the project includes a Flask web application that allows users to interact with the recommendation systems directly from a web browser with the following features:
+
 1. Generic Movie Recommendation:
 - Get a list of movies based on the most rated and highest-scored movies by setting a minimum rating threshold
 2. TF-IDF Based Recommendation:
-- Get recommendation for movies similar to a specified title using TF-IDF and cosine similarity
+- Get recommendation for movies similar to a specified title/keyword using TF-IDF and cosine similarity
+- Recommends movies similar to the one entered in the search bar using the TF-IDF algorithm, searching across all movies
 3. kNN genre-Based Recommendation:
 - Recommend movies based on a specified genre using the kNN algorithm.
-4. Autocomplete:
-- Predicting rest of the word for the user
-#### Usage and installation
+4. Autocomplete functionality:
+- Suggests movie titles and genres as you type
+5. Background animation and searchbar transition:
+- The project includes aesthetic cinema-themed background animation as well as a simple button transitions to enhance the user experience
+6. Responsive Design: 
+- The web interface is fully responsive and works seamlessly across different devices and screen sizes.
+
+### Usage and installation
 1. Clone the repo
-2. Install necessary libs (pandas, numpy, seaborn):
+2. Create and activate a virtual environment:
+```bash
+    python -m venv env
+    env\Scripts\activate
+```
+3. Install necessary dependencies:
+- Install requirements:
 ```bash
     pip install -r requirements.txt
 ```
-3. Run the jupyter file:
-    ```bash
-    jupyter notebook
-    ```
+- And download the dataset from the MovieLens website and place the CSV files in the data/ directory
+
+4. Run the Flask application:
+```bash
+python app.py
+```
+- And open index.html in your preferred web browser
+
+5. Run jupyter notebook file:
+```bash
+jupyter notebook recommendation_system.ipynb
+```
+### Examples
+Below are screens showcasing some of the project and its features:
+
+<figure>
+    <img src="images/image-1.png" alt="showcase of autocomplete feature (available in all recommendation searchbars)" width="860" height="460">
+    <figcaption>Autocomplete feature (available in all recommendation searchbars)</figcaption>
+</figure>
+
+<figure>
+    <img src="images/image-2.png" alt="showcase of TF-IDF recommendation" width="860" height="460">
+    <figcaption>Results for TF-IDF recommendation</figcaption>
+</figure>
+
+<figure>
+    <img src="images/image-3.png" alt="some of the recommendation results for 'Fantasy' movie genre" width="800" height="460">
+    <figcaption>Some of the recommendation results for 'Fantasy' movie genre</figcaption>
+</figure>
 
 
 #### Future updates
 - Further refine machine learning models to enhance recommendation accuracy.
-- Major update of front-end
-- Enhance the Flask app with more interactive features
 
-README will be periodically updated
+README will be updated if necessary
