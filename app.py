@@ -31,19 +31,25 @@ vectorizer = TfidfVectorizer(ngram_range=(1, 2))
 tfidf = vectorizer.fit_transform(mov_df["title"])
 
 #Content-Based recommendation based on movie title similarity using tf-idf and cosine measure
+#recommendation will return a list of movies with title similar to the one in searchbar
+#if a word is given instead of title, titles with the keyword will be returned instead
 def recom_tfid_title(movie_title):
     try:
-        query_index = mov_df[mov_df['title'].str.contains(movie_title, case=False)].index[0]
-    except IndexError:
+        query_tfidf = vectorizer.transform([movie_title])
+        sim_scores = cosine_similarity(query_tfidf, tfidf).flatten()
+        
+        sim_thd = 0.1 #similarity threshold for more accuracy
+        sim_indices = sim_scores.argsort()[-11:][::-1]
+        sim_indices = [i for i in sim_indices if sim_scores[i] > sim_thd]
+
+        sim_movs_tl = mov_df.iloc[sim_indices]
+        sim_movs_tl = sim_movs_tl[sim_movs_tl['title'].str.lower() != movie_title.lower()]
+
+        return sim_movs_tl.head(10)
+    
+    except Exception as e:
+        print(f"Error in recom_tfid_title: {e}")
         return pd.DataFrame()
-    
-    sim_scores = cosine_similarity(tfidf[query_index], tfidf).flatten()
-    sim_indices = sim_scores.argsort()[-11:][::-1]
-    
-    sim_movs_tl = mov_df.iloc[sim_indices]
-    sim_movs_tl = sim_movs_tl[sim_movs_tl['title'] != movie_title]
-    
-    return sim_movs_tl.head(10)
 
 #tf-idf based on cosine measure and other movies score
 def find_tfidf_allsrch(movie_id):
